@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">SilkWay</string>
+    <!-- Strings related to login -->
+    <string name="email">Email</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="remember_me">remember me</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="register">Register</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="log_in">Log In</string>
+    <string name="don_t_have_an_account">Don\'t have an account? </string>
+    <string name="new_customer_create_your_account">New Customer? <font color='#008CFF'>Create Your Account</font></string>
+    <string name="_silk_way_developer">2023 SilkWay app by Efimov Daniil</string>
+    <string name="eight_characters">passwords must be at least 8 characters</string>
+    <string name="create_your_account">Create your account</string>
+    <string name="sign_in_already_a_customer">Sign-in. Already a customer?</string>
+    <string name="boldText">Sign-in.</string>
+    <string name="normalText">" "Already a customer?</string>
+    <string name="enter_at_least_3_characters">Enter at least 3 characters</string>
+    <string name="email_required">Email Required</string>
+    <string name="enter_a_valid_email_address">Enter a valid email address</string>
+    <string name="password_required">Password Required</string>
+    <string name="password__at_least_8_characters">Password should be at least 8 characters</string>
+
+    <!-- Strings related to forgot password activity -->
+    <string name="forgot_password">Forgot password</string>
+    <string name="forgot_password_question">Forgot password?</string>
+    <string name="forgot_description">Fill in the mail field by writing your mail in it and receive an email with a link to restore your account</string>
+    <string name="forgot_get_mail">Get Mail</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

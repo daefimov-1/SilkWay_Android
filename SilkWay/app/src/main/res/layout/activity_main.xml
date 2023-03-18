@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.MainActivity">
+
+    <View
+        android:id="@+id/v_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:backgroundTint="@color/search_hint_color"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="@id/v_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/silkway_grey"/>
+
+    <ImageButton
+        android:id="@+id/ib_catalog"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_search"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/v_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_navigation" />
+
+    <View
+        android:id="@+id/v_catalog_selected"
+        android:layout_width="24dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/silkway_red"
+        app:layout_constraintLeft_toLeftOf="@id/ib_catalog"
+        app:layout_constraintRight_toRightOf="@id/ib_catalog"
+        app:layout_constraintTop_toBottomOf="@id/ib_catalog"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_specific"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/ic_apps_add"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/v_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/ib_catalog"
+        app:layout_constraintTop_toTopOf="@id/v_navigation" />
+
+    <View
+        android:id="@+id/v_specific_selected"
+        android:layout_width="24dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/silkway_red"
+        app:layout_constraintLeft_toLeftOf="@id/ib_specific"
+        app:layout_constraintRight_toRightOf="@id/ib_specific"
+        app:layout_constraintTop_toBottomOf="@id/ib_specific"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_account"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/ic_user"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/v_navigation"
+        app:layout_constraintLeft_toLeftOf="@id/ib_catalog"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/v_navigation" />
+
+    <View
+        android:id="@+id/v_account_selected"
+        android:layout_width="24dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/silkway_red"
+        app:layout_constraintLeft_toLeftOf="@id/ib_account"
+        app:layout_constraintRight_toRightOf="@id/ib_account"
+        app:layout_constraintTop_toBottomOf="@id/ib_account"
+        />
+
+    <FrameLayout
+        android:id="@+id/fl_fragments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="62dp"
+        app:layout_constraintBottom_toTopOf="@id/v_navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
