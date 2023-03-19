@@ -9,14 +9,39 @@
     <View
         android:id="@+id/red_view"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="253dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/silkway_red"
         />
 
-    <EditText
+    <TextView
+        android:id="@+id/silkway"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="26sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:translationZ="10dp"
         android:layout_marginTop="16dp"
+        android:text="SilkWay"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/news_banner"
+        android:layout_width="match_parent"
+        android:layout_height="134dp"
+        android:layout_marginTop="10dp"
+        android:translationZ="10dp"
+        app:layout_constraintTop_toBottomOf="@id/silkway"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal" />
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_width="0dp"
@@ -24,14 +49,14 @@
         android:textColorHint="@color/search_hint_color"
         android:drawableLeft="@drawable/ic_search_grey"
         android:drawablePadding="9dp"
-
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/news_banner"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:hint="Search"
         android:paddingLeft="14dp"
         android:paddingRight="16dp"
         android:paddingStart="16dp"
+        android:translationZ="10dp"
         android:backgroundTint="@color/white"
         android:background="@drawable/rounded_corners" />
 
@@ -48,10 +73,12 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/catalogItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/red_view"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="vertical"
         android:padding="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
