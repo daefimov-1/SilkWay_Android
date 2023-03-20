@@ -2,20 +2,24 @@ package com.example.silkway.presentation.view.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silkway.R
+import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.NewsItem
-import com.example.silkway.databinding.FragmentCatalogBinding
+import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.adapters.NewsAdapter
+
 
 class CatalogFragment : Fragment() {
 
     private var newsBanner: RecyclerView? = null
+    private var catalog: RecyclerView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,10 +29,10 @@ class CatalogFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_catalog, container, false)
+        val view = inflater.inflate(R.layout.fragment_catalog, container, false)
 
+        //News List
         newsBanner = view?.findViewById(R.id.news_banner)
-        Log.i("LOGGG", newsBanner.toString())
         newsBanner?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         val adapter1 = NewsAdapter(activity)
         val listNews = listOf<NewsItem>(
@@ -40,11 +44,96 @@ class CatalogFragment : Fragment() {
         adapter1.submitList(listNews)
         newsBanner?.adapter = adapter1
 
+        //Catalog List
+        catalog = view?.findViewById(R.id.catalogItems)
+        catalog?.layoutManager = GridLayoutManager(activity, 2)
+        val adapter2 = CatalogAdapter(activity)
+        val listCatalogItems = makeCatalogList()
+        adapter2.submitList(listCatalogItems)
+        catalog?.adapter = adapter2
+
         return view
     }
 
     companion object {
         @JvmStatic
         fun newInstance() = CatalogFragment()
+    }
+
+    private fun makeCatalogList(): List<CatalogItem> {
+        return listOf<CatalogItem>(
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+            CatalogItem(
+                id = 1,
+                price = 1499,
+                currency = "₽",
+                name = "Likato Professional",
+                section = "Cпрей для лица",
+                currentAmountRequests = 394,
+                minAmountRequests = 1000
+            ),
+        )
     }
 }
