@@ -11,7 +11,10 @@ import com.example.silkway.R
 import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.presentation.view.diffcallbacks.CatalogItemDiffCallback
 
-class CatalogAdapter(context: Context?) : ListAdapter<CatalogItem, CatalogAdapter.CatalogViewHolder>(
+class CatalogAdapter(
+    context: Context?,
+    private val itemClickListener: (CatalogItem) -> Unit
+) : ListAdapter<CatalogItem, CatalogAdapter.CatalogViewHolder>(
     CatalogItemDiffCallback()
 ) {
 
@@ -38,6 +41,10 @@ class CatalogAdapter(context: Context?) : ListAdapter<CatalogItem, CatalogAdapte
             title.text = item.name + "/" + item.section
             currentAmountRequests.text = item.currentAmountRequests.toString()
             minAmountRequests.text = item.minAmountRequests.toString()
+
+            itemView.setOnClickListener {
+                itemClickListener(item)
+            }
         }
     }
 }

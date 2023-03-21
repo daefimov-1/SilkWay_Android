@@ -1,5 +1,9 @@
 package com.example.silkway.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class CatalogItem(
     var id: Int = 0,
     val price: Int,
@@ -9,4 +13,5 @@ data class CatalogItem(
     val currentAmountRequests: Long,
     val minAmountRequests: Long,
     val image: String? = null,
-)
+    val favourite: Boolean = false
+) : Parcelable

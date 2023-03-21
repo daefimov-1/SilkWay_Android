@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -61,4 +62,7 @@ dependencies {
 
     //CardView
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //Composite adapter
+    implementation 'com.elveum:element-adapter:0.6'
 }

@@ -14,6 +14,7 @@ import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.NewsItem
 import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.adapters.NewsAdapter
+import com.example.silkway.presentation.view.details.CatalogDetailsActivity
 
 
 class CatalogFragment : Fragment() {
@@ -47,7 +48,10 @@ class CatalogFragment : Fragment() {
         //Catalog List
         catalog = view?.findViewById(R.id.catalogItems)
         catalog?.layoutManager = GridLayoutManager(activity, 2)
-        val adapter2 = CatalogAdapter(activity)
+        val adapter2 = CatalogAdapter(
+            activity,
+            itemClickListener = { item -> CatalogDetailsActivity.start(requireActivity(), item)}
+        )
         val listCatalogItems = makeCatalogList()
         adapter2.submitList(listCatalogItems)
         catalog?.adapter = adapter2
