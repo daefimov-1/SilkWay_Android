@@ -15,5 +15,5 @@
     <color name="silkway_extra_light_gray">#E9EEF2</color>
     <color name="search_hint_color">#636E72</color>
     <color name="vDarkGray">#6A6A6A</color>
-    vDarkGray
+    <color name="silkway_light_gray2">#DCDCDC</color>
 </resources>

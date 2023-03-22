@@ -64,80 +64,27 @@ class CatalogFragment : Fragment() {
         fun newInstance() = CatalogFragment()
     }
 
+    private fun createCatalogItem(): CatalogItem {
+        return CatalogItem(
+            id = 1,
+            price = 1499,
+            currency = "₽",
+            name = "Likato Professional",
+            section = "Face spray",
+            currentAmountRequests = 394,
+            minAmountRequests = 1000,
+            image = "NO IMAGE HERE",
+            description = resources.getString(R.string.example_description)
+        )
+    }
     private fun makeCatalogList(): List<CatalogItem> {
         return listOf<CatalogItem>(
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
-            CatalogItem(
-                id = 1,
-                price = 1499,
-                currency = "₽",
-                name = "Likato Professional",
-                section = "Cпрей для лица",
-                currentAmountRequests = 394,
-                minAmountRequests = 1000
-            ),
+            createCatalogItem(),
+            createCatalogItem(),
+            createCatalogItem(),
+            createCatalogItem(),
+            createCatalogItem(),
+            createCatalogItem()
         )
     }
 }
