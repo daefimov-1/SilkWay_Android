@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.details.CatalogDetailsActivity">
+    tools:context=".presentation.view.details.NewsDetailsActivity">
 
     <View
         android:id="@+id/v_top"
@@ -22,15 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_back"/>
-
-    <ImageButton
-        android:id="@+id/ib_star"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_star"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_details_recyclerview"
@@ -50,19 +41,5 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="17dp"/>
-
-    <Button
-        android:id="@+id/btn_make_request"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="@color/silkway_red"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        android:text="Make Request"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

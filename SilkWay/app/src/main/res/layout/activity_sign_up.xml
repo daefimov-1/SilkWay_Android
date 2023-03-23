@@ -167,6 +167,7 @@
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/silkway_red"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:text="Register an account"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

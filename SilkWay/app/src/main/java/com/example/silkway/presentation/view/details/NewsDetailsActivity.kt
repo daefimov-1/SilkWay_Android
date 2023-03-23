@@ -4,32 +4,27 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elveum.elementadapter.SimpleBindingAdapter
 import com.elveum.elementadapter.adapter
 import com.elveum.elementadapter.addBinding
-import com.example.silkway.R
-import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.DetailsListItem
-import com.example.silkway.data.storage.LoginStorage
-import com.example.silkway.databinding.ActivityCatalogDetailsBinding
+import com.example.silkway.data.model.NewsItem
+import com.example.silkway.databinding.ActivityNewsDetailsBinding
 import com.example.silkway.databinding.RvImageBlockItemBinding
-import com.example.silkway.databinding.RvParamsBlockItemBinding
 import com.example.silkway.databinding.RvTextBlockItemBinding
-import org.koin.android.ext.android.inject
+import com.example.silkway.databinding.RvTitleBlockItemBinding
 
-class CatalogDetailsActivity : AppCompatActivity() {
+class NewsDetailsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCatalogDetailsBinding
-    private val loginStorage by inject<LoginStorage>()
+    private lateinit var binding: ActivityNewsDetailsBinding
 
     companion object {
-        private const val OPEN_ITEM : String = "CatalogDetailsActivity.CATALOG_ITEM"
-        fun start(caller: Activity, item: CatalogItem?) {
-            val intent = Intent(caller, CatalogDetailsActivity::class.java)
+        private const val OPEN_NEWS : String = "NewsDetailsActivity.NEWS_ITEM"
+        fun start(caller: Activity, item: NewsItem?) {
+            val intent = Intent(caller, NewsDetailsActivity::class.java)
             if (item != null) {
-                intent.putExtra(OPEN_ITEM, item)
+                intent.putExtra(OPEN_NEWS, item)
             }
             caller.startActivity(intent)
         }
@@ -37,23 +32,13 @@ class CatalogDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCatalogDetailsBinding.inflate(layoutInflater)
+        binding = ActivityNewsDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        val item: CatalogItem = intent.getParcelableExtra(OPEN_ITEM)!!
+        val item: NewsItem = intent.getParcelableExtra(OPEN_NEWS)!!
         binding.ibClose.setOnClickListener {
             finish()
-        }
-
-        if(!loginStorage.isSupplier()) {
-            binding.btnMakeRequest.isVisible = true
-        }
-
-        setSrcStar(item.favourite)
-
-        binding.ibStar.setOnClickListener {
-            //TODO logic for star button
         }
 
         val adapter = createCompositeAdapter()
@@ -61,14 +46,6 @@ class CatalogDetailsActivity : AppCompatActivity() {
         adapter.submitList(list)
         binding.rvDetailsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvDetailsRecyclerview.adapter = adapter
-    }
-
-    private fun setSrcStar(isFavourite: Boolean) {
-        if (!isFavourite) {
-            binding.ibStar.setImageResource(R.drawable.ic_star)
-        } else {
-            binding.ibStar.setImageResource(R.drawable.ic_star_favourite)
-        }
     }
 
     private fun createCompositeAdapter(): SimpleBindingAdapter<DetailsListItem> {
@@ -80,11 +57,11 @@ class CatalogDetailsActivity : AppCompatActivity() {
                 }
             }
 
-            addBinding<DetailsListItem.Parameters, RvParamsBlockItemBinding> {
+            addBinding<DetailsListItem.Title, RvTitleBlockItemBinding> {
                 areItemsSame = { oldParameters, newParameters -> oldParameters.id == newParameters.id }
                 areContentsSame = { oldItem, newItem -> oldItem == newItem }
-                bind { params ->
-                    tvParams.text = makeFullStringParameters(params)
+                bind { item ->
+                    tvTitle.text = item.text
                 }
             }
 
@@ -98,7 +75,7 @@ class CatalogDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun CatalogItem.toListItem(): List<DetailsListItem> {
+    private fun NewsItem.toListItem(): List<DetailsListItem> {
         val list = ArrayList<DetailsListItem>()
         this.image?.let {
             list.add(
@@ -109,17 +86,12 @@ class CatalogDetailsActivity : AppCompatActivity() {
             )
         }
         list.add(
-            DetailsListItem.Parameters(
+            DetailsListItem.Title(
                 id = 0,
-                price = this.price,
-                currency = this.currency,
-                name = this.name,
-                section = this.section,
-                currentAmountRequests = this.currentAmountRequests,
-                minAmountRequests = this.minAmountRequests
+                text = this.title
             )
         )
-        this.description?.let {
+        this.text?.let {
             list.add(
                 DetailsListItem.Description(
                     id = 0,
@@ -128,15 +100,5 @@ class CatalogDetailsActivity : AppCompatActivity() {
             )
         }
         return list
-    }
-
-    private fun makeFullStringParameters(item: DetailsListItem.Parameters): String {
-        var str = ""
-        str += getString(R.string.param_name, item.name) + "\n"
-        str += getString(R.string.param_category, item.section) + "\n"
-        str += getString(R.string.param_price, item.price, item.currency) + "\n"
-        str += getString(R.string.param_current_amount_requests, item.currentAmountRequests) + "\n"
-        str += getString(R.string.param_min_amount_requests, item.minAmountRequests)
-        return str
     }
 }

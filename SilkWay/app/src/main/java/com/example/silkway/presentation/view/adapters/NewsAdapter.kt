@@ -8,10 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silkway.R
+import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.NewsItem
 import com.example.silkway.presentation.view.diffcallbacks.NewsItemDiffCallback
 
-class NewsAdapter(context: Context?) : ListAdapter<NewsItem, NewsAdapter.NewsViewHolder>(NewsItemDiffCallback()) {
+class NewsAdapter(
+    context: Context?,
+    private val itemClickListener: (NewsItem) -> Unit
+) : ListAdapter<NewsItem, NewsAdapter.NewsViewHolder>(NewsItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view: View = LayoutInflater.from(parent.context)
@@ -30,6 +34,10 @@ class NewsAdapter(context: Context?) : ListAdapter<NewsItem, NewsAdapter.NewsVie
 
         fun bind(item: NewsItem) {
             title.text = item.title
+
+            itemView.setOnClickListener {
+                itemClickListener(item)
+            }
         }
     }
 }

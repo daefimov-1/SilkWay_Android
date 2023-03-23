@@ -21,4 +21,9 @@ sealed class DetailsListItem {
         val currentAmountRequests: Long,
         val minAmountRequests: Long,
     ): DetailsListItem()
+
+    data class Title(
+        val id: Int,
+        val text: String,
+    ): DetailsListItem()
 }

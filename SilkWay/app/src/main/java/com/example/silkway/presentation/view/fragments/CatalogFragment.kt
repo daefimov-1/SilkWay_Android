@@ -15,6 +15,7 @@ import com.example.silkway.data.model.NewsItem
 import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.adapters.NewsAdapter
 import com.example.silkway.presentation.view.details.CatalogDetailsActivity
+import com.example.silkway.presentation.view.details.NewsDetailsActivity
 
 
 class CatalogFragment : Fragment() {
@@ -35,13 +36,11 @@ class CatalogFragment : Fragment() {
         //News List
         newsBanner = view?.findViewById(R.id.news_banner)
         newsBanner?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        val adapter1 = NewsAdapter(activity)
-        val listNews = listOf<NewsItem>(
-            NewsItem(1, "Скидки до 50% в Adidas!"),
-            NewsItem(2, "Новости дня"),
-            NewsItem(3, "Падение рынка"),
-            NewsItem(4, "Оптовики ликуют и зарабатывают"),
+        val adapter1 = NewsAdapter(
+            activity,
+            itemClickListener = { item -> NewsDetailsActivity.start(requireActivity(), item)}
         )
+        val listNews = makeNewsList()
         adapter1.submitList(listNews)
         newsBanner?.adapter = adapter1
 
@@ -85,6 +84,22 @@ class CatalogFragment : Fragment() {
             createCatalogItem(),
             createCatalogItem(),
             createCatalogItem()
+        )
+    }
+    private fun createNewsItem(title: String): NewsItem {
+        return NewsItem(
+            id = 1,
+            title = title,
+            text = resources.getString(R.string.example_description),
+            image = "NO IMAGE HERE",
+        )
+    }
+    private fun makeNewsList(): List<NewsItem> {
+        return listOf<NewsItem>(
+            createNewsItem("Скидки до 50% в Adidas!"),
+            createNewsItem("Новости дня"),
+            createNewsItem("Падение рынка"),
+            createNewsItem("Оптовики ликуют и зарабатывают"),
         )
     }
 }

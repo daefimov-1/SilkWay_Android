@@ -38,6 +38,7 @@
         android:layout_marginTop="16dp"
         android:text="Parameters"
         android:textStyle="bold"
+        android:textColor="@color/silkway_dark_grey"
         android:textSize="20sp"/>
     <TextView
         android:id="@+id/tv_params"
@@ -52,8 +53,7 @@
         app:layout_constraintLeft_toLeftOf="@id/v_background"
         app:layout_constraintBottom_toBottomOf="@id/v_background"
         tools:text="Name: Sprey"
-        android:textStyle="bold"
-        android:textColor="@color/silkway_dark_grey"
+        android:textColor="@color/black"
         android:textSize="16sp"
         />
 
