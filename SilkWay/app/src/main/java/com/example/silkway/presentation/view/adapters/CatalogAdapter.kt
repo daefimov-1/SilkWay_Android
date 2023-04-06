@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silkway.R
@@ -34,6 +35,8 @@ class CatalogAdapter(
         private val title: TextView = itemView.findViewById(R.id.title)
         private val currentAmountRequests: TextView = itemView.findViewById(R.id.num_requests)
         private val minAmountRequests: TextView = itemView.findViewById(R.id.num_min_requests)
+        private val textYouRequested: TextView = itemView.findViewById(R.id.tv_you_requested)
+        private val amountYouRequested: TextView = itemView.findViewById(R.id.tv_amount_you_requested)
         //TODO image
 
         fun bind(item: CatalogItem) {
@@ -41,6 +44,12 @@ class CatalogAdapter(
             title.text = item.name + "/" + item.section
             currentAmountRequests.text = item.currentAmountRequests.toString()
             minAmountRequests.text = item.minAmountRequests.toString()
+
+            if (item.youRequested != 0) {
+                textYouRequested.isVisible = true
+                amountYouRequested.isVisible = true
+                amountYouRequested.text = item.youRequested.toString()
+            }
 
             itemView.setOnClickListener {
                 itemClickListener(item)

@@ -14,5 +14,6 @@ data class CatalogItem(
     val minAmountRequests: Long,
     val image: String? = null,
     val favourite: Boolean = false,
-    val description: String? = null
+    val description: String? = null,
+    val youRequested: Int = 0,
 ) : Parcelable

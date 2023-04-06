@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="180dp"
-    android:layout_height="240dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:layout_marginStart="16dp">
 
@@ -52,7 +52,7 @@
         app:layout_constraintLeft_toRightOf="@id/price"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="2dp"
-        android:text="по оптовой цене"
+        android:text="at wholesale price"
         android:textColor="@color/silkway_grey"
         android:textSize="10sp"
         android:textStyle="bold"
@@ -78,7 +78,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
         android:layout_marginStart="10dp"
-        android:text="Заявок"
+        android:text="Requested"
         android:textSize="12dp"
         android:textColor="@color/silkway_grey"
         />
@@ -102,7 +102,7 @@
         app:layout_constraintBottom_toBottomOf="@id/num_requests"
         app:layout_constraintLeft_toRightOf="@id/num_requests"
         android:layout_marginStart="3dp"
-        android:text="из"
+        android:text="from"
         android:textSize="12dp"
         android:textColor="@color/silkway_grey"
         />
@@ -118,5 +118,40 @@
         android:textSize="12dp"
         android:textColor="@color/black"
         />
+
+    <TextView
+        android:id="@+id/tv_you_requested"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/num_min_requests"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="You requested"
+        android:textSize="14dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/silkway_red"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <TextView
+        android:id="@+id/tv_amount_you_requested"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tv_you_requested"
+        app:layout_constraintLeft_toRightOf="@id/tv_you_requested"
+        android:layout_marginStart="3dp"
+        tools:text="60"
+        android:textSize="14dp"
+        android:textColor="@color/silkway_red"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="18dp"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:background="@drawable/gradient_for_text"
+        app:layout_constraintRight_toRightOf="@id/title"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
