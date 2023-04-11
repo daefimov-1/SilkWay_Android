@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.example.silkway.R
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.silkway.databinding.FragmentByerBinding
+import com.example.silkway.presentation.view.adapters.CatalogAdapter
+import com.example.silkway.presentation.view.details.CatalogDetailsActivity
+import com.example.silkway.presentation.viewmodel.MainViewModel
+import androidx.lifecycle.Observer
 
 class ByerFragment : Fragment() {
 
     private lateinit var binding: FragmentByerBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +24,19 @@ class ByerFragment : Fragment() {
     ): View {
         binding = FragmentByerBinding.inflate(inflater, container, false)
 
-        byerHasRequests(false)
+        byerHasRequests(true)
+
+        //List
+        binding.rvRequests.layoutManager = GridLayoutManager(activity, 2)
+        val adapter2 = CatalogAdapter(
+            activity,
+            itemClickListener = { item -> CatalogDetailsActivity.start(requireActivity(), item)}
+        )
+        val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainViewModel.getRequestedCatalogList()?.observe(requireActivity(), Observer{
+            adapter2.submitList(it)
+        })
+        binding.rvRequests.adapter = adapter2
 
         return binding.getRoot()
     }

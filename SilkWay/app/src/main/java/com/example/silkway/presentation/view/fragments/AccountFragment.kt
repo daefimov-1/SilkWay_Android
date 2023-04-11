@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.example.silkway.R
 import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.presentation.view.LoginActivity
+import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 
 class AccountFragment : Fragment() {
@@ -28,8 +30,10 @@ class AccountFragment : Fragment() {
         nameField = view.findViewById(R.id.tv_name)
         emailField = view.findViewById(R.id.tv_email)
         logOutButton = view.findViewById(R.id.logOut)
+        val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         logOutButton.setOnClickListener {
             loginStorage.clearAll()
+            mainViewModel.deleteCatalogInfo()
             LoginActivity.start(requireActivity())
             requireActivity().finish()
         }

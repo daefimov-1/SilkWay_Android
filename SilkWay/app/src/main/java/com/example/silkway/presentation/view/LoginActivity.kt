@@ -4,9 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.silkway.R
+import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.User
 import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.databinding.ActivityLoginBinding
+import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
@@ -33,6 +37,8 @@ class LoginActivity : AppCompatActivity() {
                     isByer = true
                 )
             )
+            val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+            mainViewModel.insertCatalogList(makeCatalogList())
             MainActivity.start(this)
         }
         binding.tvDontHaveAnAccount.setOnClickListener {
@@ -48,5 +54,30 @@ class LoginActivity : AppCompatActivity() {
             val intent: Intent = Intent(caller, LoginActivity::class.java)
             caller?.startActivity(intent)
         }
+    }
+
+    private fun createCatalogItem(id: Int, amountRequested: Int = 0): CatalogItem {
+        return CatalogItem(
+            id = id,
+            price = 1499,
+            currency = "₽",
+            name = "Likato Professional",
+            section = "Face spray",
+            currentAmountRequests = 394,
+            minAmountRequests = 1000,
+            image = "NO IMAGE HERE",
+            description = resources.getString(R.string.example_description),
+            youRequested = amountRequested
+        )
+    }
+    private fun makeCatalogList(): List<CatalogItem> {
+        return listOf<CatalogItem>(
+            createCatalogItem(0),
+            createCatalogItem(1,35),
+            createCatalogItem(2),
+            createCatalogItem(3),
+            createCatalogItem(4, 4),
+            createCatalogItem(5,100)
+        )
     }
 }

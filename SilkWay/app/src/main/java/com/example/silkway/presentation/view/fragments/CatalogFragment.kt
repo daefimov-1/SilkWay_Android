@@ -1,21 +1,22 @@
 package com.example.silkway.presentation.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silkway.R
-import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.NewsItem
 import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.adapters.NewsAdapter
 import com.example.silkway.presentation.view.details.CatalogDetailsActivity
 import com.example.silkway.presentation.view.details.NewsDetailsActivity
+import com.example.silkway.presentation.viewmodel.MainViewModel
 
 
 class CatalogFragment : Fragment() {
@@ -51,8 +52,10 @@ class CatalogFragment : Fragment() {
             activity,
             itemClickListener = { item -> CatalogDetailsActivity.start(requireActivity(), item)}
         )
-        val listCatalogItems = makeCatalogList()
-        adapter2.submitList(listCatalogItems)
+        val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainViewModel.getCatalogList()?.observe(requireActivity(), Observer{
+            adapter2.submitList(it)
+        })
         catalog?.adapter = adapter2
 
         return view
@@ -61,30 +64,6 @@ class CatalogFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = CatalogFragment()
-    }
-
-    private fun createCatalogItem(): CatalogItem {
-        return CatalogItem(
-            id = 1,
-            price = 1499,
-            currency = "₽",
-            name = "Likato Professional",
-            section = "Face spray",
-            currentAmountRequests = 394,
-            minAmountRequests = 1000,
-            image = "NO IMAGE HERE",
-            description = resources.getString(R.string.example_description)
-        )
-    }
-    private fun makeCatalogList(): List<CatalogItem> {
-        return listOf<CatalogItem>(
-            createCatalogItem(),
-            createCatalogItem(),
-            createCatalogItem(),
-            createCatalogItem(),
-            createCatalogItem(),
-            createCatalogItem()
-        )
     }
     private fun createNewsItem(title: String): NewsItem {
         return NewsItem(
