@@ -18,8 +18,8 @@ sealed class DetailsListItem {
         val currency: String,
         val name: String,
         val section: String,
-        val currentAmountRequests: Long,
-        val minAmountRequests: Long,
+        val currentAmountRequests: Int,
+        val minAmountRequests: Int,
     ): DetailsListItem()
 
     data class Title(

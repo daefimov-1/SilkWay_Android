@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.silkway.R
 import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.presentation.view.LoginActivity
+import com.example.silkway.presentation.view.WishlistActivity
 import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 
@@ -17,6 +18,7 @@ class AccountFragment : Fragment() {
     private lateinit var nameField: TextView
     private lateinit var emailField: TextView
     private lateinit var logOutButton: TextView
+    private lateinit var wishlistButton: TextView
     private val loginStorage by inject<LoginStorage>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +32,16 @@ class AccountFragment : Fragment() {
         nameField = view.findViewById(R.id.tv_name)
         emailField = view.findViewById(R.id.tv_email)
         logOutButton = view.findViewById(R.id.logOut)
+        wishlistButton = view.findViewById(R.id.myWishList)
         val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         logOutButton.setOnClickListener {
             loginStorage.clearAll()
             mainViewModel.deleteCatalogInfo()
             LoginActivity.start(requireActivity())
             requireActivity().finish()
+        }
+        wishlistButton.setOnClickListener {
+            WishlistActivity.start(requireActivity())
         }
         val user = loginStorage.getUserInfo()
         nameField.text = user.name

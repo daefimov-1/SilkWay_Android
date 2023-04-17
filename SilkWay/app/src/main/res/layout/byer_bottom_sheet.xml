@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_background">
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:id="@+id/layout_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/simple_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_order"
+            app:tint="@color/silkway_red" />
+
+        <TextView
+            android:id="@+id/simple_text"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Making request"
+            android:textColor="@color/silkway_red"
+            android:textStyle="bold"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_collapsed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_top">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="normal"
+            android:text="In order to make an request, you just need to specify the quantity"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:lines="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:id="@+id/tv_left_to_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textStyle="normal"
+                android:text="Left to complete: "
+                android:textSize="15sp"
+                android:textColor="@color/silkway_grey"
+                android:layout_marginTop="10dp"
+                android:lines="1"/>
+
+            <TextView
+                android:id="@+id/tv_amount_needed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textStyle="normal"
+                tools:text="342"
+                android:textSize="15sp"
+                android:textColor="@color/silkway_grey"
+                android:layout_marginTop="10dp"
+                android:lines="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_warning_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textStyle="normal"
+                tools:text="Left to complete: "
+                android:textSize="15sp"
+                android:textColor="@color/silkway_red"
+                android:layout_marginTop="10dp"
+                android:lines="1" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_warning_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textStyle="normal"
+                tools:text="342"
+                android:textSize="15sp"
+                android:textColor="@color/silkway_red"
+                android:layout_marginTop="10dp"
+                android:lines="1"/>
+
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_quantity1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome_back"
+            android:hint="Quantity"
+
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="number"
+                android:id="@+id/text_input_edittext_quantity1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/button_a"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/silkway_red"
+                android:layout_weight="1"
+                android:text="Finish"
+                android:textColor="@color/white"/>
+
+            <ImageButton
+                android:id="@+id/ib_delete"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/silkway_red"
+                android:src="@drawable/ic_trash"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

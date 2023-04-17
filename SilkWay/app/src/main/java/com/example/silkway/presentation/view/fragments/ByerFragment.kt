@@ -24,19 +24,22 @@ class ByerFragment : Fragment() {
     ): View {
         binding = FragmentByerBinding.inflate(inflater, container, false)
 
-        byerHasRequests(true)
-
         //List
         binding.rvRequests.layoutManager = GridLayoutManager(activity, 2)
-        val adapter2 = CatalogAdapter(
+        val adapter = CatalogAdapter(
             activity,
             itemClickListener = { item -> CatalogDetailsActivity.start(requireActivity(), item)}
         )
         val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mainViewModel.getRequestedCatalogList()?.observe(requireActivity(), Observer{
-            adapter2.submitList(it)
+            adapter.submitList(it)
+            if (it.isEmpty()) {
+                byerHasRequests(false)
+            } else {
+                byerHasRequests(true)
+            }
         })
-        binding.rvRequests.adapter = adapter2
+        binding.rvRequests.adapter = adapter
 
         return binding.getRoot()
     }

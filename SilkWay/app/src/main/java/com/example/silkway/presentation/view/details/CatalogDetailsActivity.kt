@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elveum.elementadapter.SimpleBindingAdapter
 import com.elveum.elementadapter.adapter
@@ -17,12 +19,15 @@ import com.example.silkway.databinding.ActivityCatalogDetailsBinding
 import com.example.silkway.databinding.RvImageBlockItemBinding
 import com.example.silkway.databinding.RvParamsBlockItemBinding
 import com.example.silkway.databinding.RvTextBlockItemBinding
+import com.example.silkway.presentation.view.fragments.dialogs.ByerBottomSheetDialog
+import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 
 class CatalogDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCatalogDetailsBinding
     private val loginStorage by inject<LoginStorage>()
+    private var isFavourite: Boolean = false
 
     companion object {
         private const val OPEN_ITEM : String = "CatalogDetailsActivity.CATALOG_ITEM"
@@ -41,19 +46,32 @@ class CatalogDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
         val item: CatalogItem = intent.getParcelableExtra(OPEN_ITEM)!!
         binding.ibClose.setOnClickListener {
             finish()
         }
+        isFavourite = item.favourite
 
         if(!loginStorage.isSupplier()) {
             binding.btnMakeRequest.isVisible = true
         }
 
-        setSrcStar(item.favourite)
+        mainViewModel.getCatalogItemById(item.id)?.observe(this, Observer{
+            setSrcStar(it.favourite)
+        })
 
         binding.ibStar.setOnClickListener {
-            //TODO logic for star button
+            mainViewModel.updateCatalogItemIsFavourite(!isFavourite, item.id)
+        }
+
+        binding.btnMakeRequest.setOnClickListener {
+            ByerBottomSheetDialog(
+                item_id = item.id,
+                needed_amount = item.minAmountRequests - item.currentAmountRequests,
+                youHaveRequested = item.youRequested
+            ).show(supportFragmentManager, "tag")
         }
 
         val adapter = createCompositeAdapter()

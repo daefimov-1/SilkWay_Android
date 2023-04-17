@@ -18,18 +18,27 @@ interface CatalogItemDao {
     @Query("SELECT * FROM catalogItem WHERE youRequested > 0")
     fun getRequestedCatalogList(): LiveData<List<CatalogItem>>
 
+    @Query("SELECT * FROM catalogItem WHERE favourite")
+    fun getFavouritesCatalogList(): LiveData<List<CatalogItem>>
+
+    @Query("SELECT * FROM catalogItem WHERE id = :arg0")
+    fun getCatalogItemById(arg0: Int): LiveData<CatalogItem>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCatalogItem(item: CatalogItem)
 
     @Insert
     fun insertAllCatalogItems(list: List<CatalogItem>)
 
-    @Update
-    fun updateCatalogItem(item: CatalogItem)
-
     @Delete
     fun deleteCatalogItem(item: CatalogItem)
 
     @Query("DELETE FROM catalogItem")
     fun deleteAll()
+
+    @Query("UPDATE catalogitem SET youRequested=:arg0 WHERE id = :arg1")
+    fun updateCatalogItemRequestedAmount(arg0: Int, arg1: Int)
+
+    @Query("UPDATE catalogitem SET favourite=:arg0 WHERE id = :arg1")
+    fun updateCatalogItemIsFavourite(arg0: Boolean, arg1: Int)
 }

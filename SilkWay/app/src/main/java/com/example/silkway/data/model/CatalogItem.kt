@@ -20,9 +20,9 @@ data class CatalogItem(
     @ColumnInfo(name = "section")
     val section: String,
     @ColumnInfo(name = "currentAmountRequests")
-    val currentAmountRequests: Long,
+    val currentAmountRequests: Int,
     @ColumnInfo(name = "minAmountRequests")
-    val minAmountRequests: Long,
+    val minAmountRequests: Int,
     @ColumnInfo(name = "image")
     val image: String? = null,
     @ColumnInfo(name = "favourite")
