@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.example.silkway.data.model.NewsItem
 import com.example.silkway.presentation.view.diffcallbacks.NewsItemDiffCallback
 
 class NewsAdapter(
-    context: Context?,
+    private val context: Context?,
     private val itemClickListener: (NewsItem) -> Unit
 ) : ListAdapter<NewsItem, NewsAdapter.NewsViewHolder>(NewsItemDiffCallback()) {
 
@@ -30,10 +31,14 @@ class NewsAdapter(
     inner class NewsViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
         private val title: TextView = itemView.findViewById(R.id.title)
+        private val image: ImageView = itemView.findViewById(R.id.image)
         //TODO image
 
         fun bind(item: NewsItem) {
             title.text = item.title
+            image.setImageDrawable(
+                context?.getDrawable(item.image)
+            )
 
             itemView.setOnClickListener {
                 itemClickListener(item)

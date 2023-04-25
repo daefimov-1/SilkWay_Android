@@ -22,6 +22,10 @@ class MainViewModel : ViewModel() {
         return favouritesCatalogListLiveData
     }
 
+    fun getFilteredCatalogList(category: String): LiveData<List<CatalogItem>>?{
+        return App.instance.getCatalogItemsDao()?.filteredCatalogItemList(category)
+    }
+
     fun getCatalogItemById(id: Int) : LiveData<CatalogItem>? {
         return App.instance.getCatalogItemsDao()?.getCatalogItemById(id)
     }

@@ -53,7 +53,7 @@ class NewsDetailsActivity : AppCompatActivity() {
             addBinding<DetailsListItem.Image, RvImageBlockItemBinding> {
                 areItemsSame = { oldImage, newImage -> oldImage.id == newImage.id }
                 bind { imageSrc ->
-                    //TODO set image
+                    ivImage.setImageResource(imageSrc.imageSrc)
                 }
             }
 
@@ -77,7 +77,7 @@ class NewsDetailsActivity : AppCompatActivity() {
 
     private fun NewsItem.toListItem(): List<DetailsListItem> {
         val list = ArrayList<DetailsListItem>()
-        this.image?.let {
+        this.image.let {
             list.add(
                 DetailsListItem.Image(
                     id = 0,

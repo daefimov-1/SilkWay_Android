@@ -41,4 +41,7 @@ interface CatalogItemDao {
 
     @Query("UPDATE catalogitem SET favourite=:arg0 WHERE id = :arg1")
     fun updateCatalogItemIsFavourite(arg0: Boolean, arg1: Int)
+
+    @Query("SELECT * FROM catalogItem WHERE section LIKE :arg0")
+    fun filteredCatalogItemList(arg0: String): LiveData<List<CatalogItem>>
 }

@@ -94,7 +94,7 @@ class CatalogDetailsActivity : AppCompatActivity() {
             addBinding<DetailsListItem.Image, RvImageBlockItemBinding> {
                 areItemsSame = { oldImage, newImage -> oldImage.id == newImage.id }
                 bind { imageSrc ->
-                    //TODO set image
+                    ivImage.setImageResource(imageSrc.imageSrc)
                 }
             }
 

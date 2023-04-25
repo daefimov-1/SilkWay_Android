@@ -61,6 +61,7 @@
         android:background="@drawable/rounded_corners" />
 
     <ImageButton
+        android:id="@+id/btn_filter"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ic_settings_sliders"

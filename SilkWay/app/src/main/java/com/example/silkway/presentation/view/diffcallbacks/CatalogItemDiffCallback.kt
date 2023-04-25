@@ -9,6 +9,6 @@ class CatalogItemDiffCallback : DiffUtil.ItemCallback<CatalogItem>() {
     }
 
     override fun areContentsTheSame(oldItem: CatalogItem, newItem: CatalogItem): Boolean {
-        return oldItem == newItem
+        return oldItem.name == newItem.name
     }
 }

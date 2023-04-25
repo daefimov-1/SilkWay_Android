@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
@@ -13,7 +14,7 @@ import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.presentation.view.diffcallbacks.CatalogItemDiffCallback
 
 class CatalogAdapter(
-    context: Context?,
+    private val context: Context?,
     private val itemClickListener: (CatalogItem) -> Unit
 ) : ListAdapter<CatalogItem, CatalogAdapter.CatalogViewHolder>(
     CatalogItemDiffCallback()
@@ -37,13 +38,18 @@ class CatalogAdapter(
         private val minAmountRequests: TextView = itemView.findViewById(R.id.num_min_requests)
         private val textYouRequested: TextView = itemView.findViewById(R.id.tv_you_requested)
         private val amountYouRequested: TextView = itemView.findViewById(R.id.tv_amount_you_requested)
-        //TODO image
+        private val image: ImageView = itemView.findViewById(R.id.image)
 
         fun bind(item: CatalogItem) {
             price.text = item.price.toString() + " " + item.currency
             title.text = item.name + "/" + item.section
             currentAmountRequests.text = item.currentAmountRequests.toString()
             minAmountRequests.text = item.minAmountRequests.toString()
+            if (item.image != null) {
+                image.setImageDrawable(
+                    context?.getDrawable(item.image)
+                )
+            }
 
             if (item.youRequested != 0) {
                 textYouRequested.isVisible = true

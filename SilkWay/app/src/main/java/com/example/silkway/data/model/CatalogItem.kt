@@ -24,7 +24,7 @@ data class CatalogItem(
     @ColumnInfo(name = "minAmountRequests")
     val minAmountRequests: Int,
     @ColumnInfo(name = "image")
-    val image: String? = null,
+    val image: Int? = null,
     @ColumnInfo(name = "favourite")
     val favourite: Boolean = false,
     @ColumnInfo(name = "description")

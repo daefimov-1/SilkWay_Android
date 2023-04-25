@@ -17,7 +17,7 @@ class LoginSharedPrefImpl(
         editor.putString(EMAIL, response.email)
         editor.putString(TOKEN, response.token)
         editor.putBoolean(IS_SUPPLIER, response.isSupplier)
-       editor.putBoolean(IS_BYER, response.isByer)
+        editor.putBoolean(IS_BYER, response.isByer)
         editor.apply()
     }
 
