@@ -14,6 +14,7 @@ import com.example.silkway.databinding.ActivityNewsDetailsBinding
 import com.example.silkway.databinding.RvImageBlockItemBinding
 import com.example.silkway.databinding.RvTextBlockItemBinding
 import com.example.silkway.databinding.RvTitleBlockItemBinding
+import com.example.silkway.presentation.utils.toBitmap
 
 class NewsDetailsActivity : AppCompatActivity() {
 
@@ -52,8 +53,8 @@ class NewsDetailsActivity : AppCompatActivity() {
         return adapter<DetailsListItem> { // <--- Base type
             addBinding<DetailsListItem.Image, RvImageBlockItemBinding> {
                 areItemsSame = { oldImage, newImage -> oldImage.id == newImage.id }
-                bind { imageSrc ->
-                    ivImage.setImageResource(imageSrc.imageSrc)
+                bind { image ->
+                    ivImage.setImageBitmap(image.imageBase64String.toBitmap())
                 }
             }
 
@@ -81,7 +82,7 @@ class NewsDetailsActivity : AppCompatActivity() {
             list.add(
                 DetailsListItem.Image(
                     id = 0,
-                    imageSrc = it
+                    imageBase64String = it
                 )
             )
         }

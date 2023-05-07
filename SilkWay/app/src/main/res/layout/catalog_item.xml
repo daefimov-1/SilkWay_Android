@@ -120,7 +120,7 @@
         />
 
     <TextView
-        android:id="@+id/tv_you_requested"
+        android:id="@+id/tv_red_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/num_min_requests"
@@ -137,8 +137,8 @@
         android:id="@+id/tv_amount_you_requested"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/tv_you_requested"
-        app:layout_constraintLeft_toRightOf="@id/tv_you_requested"
+        app:layout_constraintBottom_toBottomOf="@id/tv_red_text"
+        app:layout_constraintLeft_toRightOf="@id/tv_red_text"
         android:layout_marginStart="3dp"
         tools:text="60"
         android:textSize="14dp"

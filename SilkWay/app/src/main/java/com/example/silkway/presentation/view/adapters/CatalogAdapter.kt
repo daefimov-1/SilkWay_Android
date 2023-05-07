@@ -11,11 +11,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silkway.R
 import com.example.silkway.data.model.CatalogItem
+import com.example.silkway.data.storage.LoginStorage
+import com.example.silkway.presentation.utils.toBitmap
 import com.example.silkway.presentation.view.diffcallbacks.CatalogItemDiffCallback
+import com.example.silkway.presentation.view.fragments.SpecializedFragment
 
 class CatalogAdapter(
     private val context: Context?,
-    private val itemClickListener: (CatalogItem) -> Unit
+    private val itemClickListener: (CatalogItem) -> Unit,
+    private val loginStorage: LoginStorage,
+    private val fromSpecializedScreen: Boolean = false,
 ) : ListAdapter<CatalogItem, CatalogAdapter.CatalogViewHolder>(
     CatalogItemDiffCallback()
 ) {
@@ -36,7 +41,7 @@ class CatalogAdapter(
         private val title: TextView = itemView.findViewById(R.id.title)
         private val currentAmountRequests: TextView = itemView.findViewById(R.id.num_requests)
         private val minAmountRequests: TextView = itemView.findViewById(R.id.num_min_requests)
-        private val textYouRequested: TextView = itemView.findViewById(R.id.tv_you_requested)
+        private val redText: TextView = itemView.findViewById(R.id.tv_red_text)
         private val amountYouRequested: TextView = itemView.findViewById(R.id.tv_amount_you_requested)
         private val image: ImageView = itemView.findViewById(R.id.image)
 
@@ -46,15 +51,18 @@ class CatalogAdapter(
             currentAmountRequests.text = item.currentAmountRequests.toString()
             minAmountRequests.text = item.minAmountRequests.toString()
             if (item.image != null) {
-                image.setImageDrawable(
-                    context?.getDrawable(item.image)
-                )
+                image.setImageBitmap(item.image.toBitmap())
             }
 
-            if (item.youRequested != 0) {
-                textYouRequested.isVisible = true
+            if (loginStorage.isByer() && item.youRequested != 0) {
+                redText.isVisible = true
                 amountYouRequested.isVisible = true
                 amountYouRequested.text = item.youRequested.toString()
+            }
+
+            if(!loginStorage.isByer() && item.isMine && !fromSpecializedScreen) {
+                redText.isVisible = true
+                redText.text = "It is your product"
             }
 
             itemView.setOnClickListener {

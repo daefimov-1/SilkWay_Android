@@ -8,14 +8,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.databinding.ActivityWishlistBinding
 import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.details.CatalogDetailsActivity
 import com.example.silkway.presentation.viewmodel.MainViewModel
+import org.koin.android.ext.android.inject
 
 class WishlistActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWishlistBinding
+    private val loginStorage by inject<LoginStorage>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityWishlistBinding.inflate(layoutInflater)
@@ -26,7 +29,8 @@ class WishlistActivity : AppCompatActivity() {
         binding.rvFavourites.layoutManager = GridLayoutManager(this, 2)
         val adapter = CatalogAdapter(
             this,
-            itemClickListener = { item -> CatalogDetailsActivity.start(this, item)}
+            itemClickListener = { item -> CatalogDetailsActivity.start(this, item)},
+            loginStorage
         )
         val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mainViewModel.getFavouritesCatalogList()?.observe(this, Observer{

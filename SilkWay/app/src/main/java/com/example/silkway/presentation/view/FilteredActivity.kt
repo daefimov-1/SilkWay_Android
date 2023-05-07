@@ -7,14 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.databinding.ActivityFilteredBinding
 import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.details.CatalogDetailsActivity
 import com.example.silkway.presentation.viewmodel.MainViewModel
+import org.koin.android.ext.android.inject
 
 class FilteredActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFilteredBinding
+    private val loginStorage by inject<LoginStorage>()
 
     companion object {
         private const val CATEGORY : String = "FilteredActivity.Category"
@@ -43,7 +46,8 @@ class FilteredActivity : AppCompatActivity() {
         binding.rvFilteredItems.layoutManager = GridLayoutManager(this, 2)
         val adapter2 = CatalogAdapter(
             this,
-            itemClickListener = { item -> CatalogDetailsActivity.start(this, item)}
+            itemClickListener = { item -> CatalogDetailsActivity.start(this, item)},
+            loginStorage
         )
         val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         if(category != null) {

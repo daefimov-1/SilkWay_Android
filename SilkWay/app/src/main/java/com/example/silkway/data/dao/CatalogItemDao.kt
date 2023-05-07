@@ -18,6 +18,9 @@ interface CatalogItemDao {
     @Query("SELECT * FROM catalogItem WHERE youRequested > 0")
     fun getRequestedCatalogList(): LiveData<List<CatalogItem>>
 
+    @Query("SELECT * FROM catalogItem WHERE isMine")
+    fun getMineCatalogList(): LiveData<List<CatalogItem>>
+
     @Query("SELECT * FROM catalogItem WHERE favourite")
     fun getFavouritesCatalogList(): LiveData<List<CatalogItem>>
 

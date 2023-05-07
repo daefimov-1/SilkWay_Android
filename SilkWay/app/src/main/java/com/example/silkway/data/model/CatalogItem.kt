@@ -24,11 +24,13 @@ data class CatalogItem(
     @ColumnInfo(name = "minAmountRequests")
     val minAmountRequests: Int,
     @ColumnInfo(name = "image")
-    val image: Int? = null,
+    val image: String? = null,
     @ColumnInfo(name = "favourite")
     val favourite: Boolean = false,
     @ColumnInfo(name = "description")
     val description: String? = null,
     @ColumnInfo(name = "youRequested")
     val youRequested: Int = 0,
+    @ColumnInfo(name = "isMine")
+    val isMine: Boolean = false,
 ) : Parcelable

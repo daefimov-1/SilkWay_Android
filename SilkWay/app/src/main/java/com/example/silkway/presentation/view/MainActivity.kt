@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import com.example.silkway.R
 import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.presentation.view.fragments.AccountFragment
-import com.example.silkway.presentation.view.fragments.ByerFragment
+import com.example.silkway.presentation.view.fragments.SpecializedFragment
 import com.example.silkway.presentation.view.fragments.CatalogFragment
 import com.example.silkway.presentation.view.fragments.SupplierFragment
 import org.koin.android.ext.android.inject
@@ -46,11 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val accountFragment = AccountFragment()
         val catalogFragment = CatalogFragment()
-        val specificFragment = if (loginStorage.isSupplier()) {
-            SupplierFragment()
-        } else {
-            ByerFragment()
-        }
+        val specificFragment = SpecializedFragment()
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_fragments, catalogFragment)
@@ -110,13 +106,8 @@ class MainActivity : AppCompatActivity() {
             MainPage.SPECIFIC -> {
                 makeSelectionInvisible()
                 specificSelected.isVisible = true
-                val specificFragment = if (loginStorage.isSupplier()) {
-                    SupplierFragment()
-                } else {
-                    ByerFragment()
-                }
                 supportFragmentManager.beginTransaction().apply {
-                    add(R.id.fl_fragments, specificFragment)
+                    add(R.id.fl_fragments, SpecializedFragment())
                     commit()
                 }
             }

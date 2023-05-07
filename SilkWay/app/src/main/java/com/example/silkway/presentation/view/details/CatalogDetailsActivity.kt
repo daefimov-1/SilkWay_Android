@@ -19,6 +19,7 @@ import com.example.silkway.databinding.ActivityCatalogDetailsBinding
 import com.example.silkway.databinding.RvImageBlockItemBinding
 import com.example.silkway.databinding.RvParamsBlockItemBinding
 import com.example.silkway.databinding.RvTextBlockItemBinding
+import com.example.silkway.presentation.utils.toBitmap
 import com.example.silkway.presentation.view.fragments.dialogs.ByerBottomSheetDialog
 import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
@@ -54,7 +55,11 @@ class CatalogDetailsActivity : AppCompatActivity() {
         }
         isFavourite = item.favourite
 
-        if(!loginStorage.isSupplier()) {
+        if(item.youRequested > 0) {
+            binding.btnMakeRequest.text = "Edit Request"
+        }
+
+        if(loginStorage.isByer()) {
             binding.btnMakeRequest.isVisible = true
         }
 
@@ -70,7 +75,9 @@ class CatalogDetailsActivity : AppCompatActivity() {
             ByerBottomSheetDialog(
                 item_id = item.id,
                 needed_amount = item.minAmountRequests - item.currentAmountRequests,
-                youHaveRequested = item.youRequested
+                youHaveRequested = item.youRequested,
+                requestMaded = { binding.btnMakeRequest.text = "Edit Request" },
+                requestDeleted = { binding.btnMakeRequest.text = "Make Request" }
             ).show(supportFragmentManager, "tag")
         }
 
@@ -93,8 +100,8 @@ class CatalogDetailsActivity : AppCompatActivity() {
         return adapter<DetailsListItem> { // <--- Base type
             addBinding<DetailsListItem.Image, RvImageBlockItemBinding> {
                 areItemsSame = { oldImage, newImage -> oldImage.id == newImage.id }
-                bind { imageSrc ->
-                    ivImage.setImageResource(imageSrc.imageSrc)
+                bind { imageString ->
+                    ivImage.setImageBitmap(imageString.imageBase64String.toBitmap())
                 }
             }
 
@@ -122,7 +129,7 @@ class CatalogDetailsActivity : AppCompatActivity() {
             list.add(
                 DetailsListItem.Image(
                     id = 0,
-                    imageSrc = it
+                    imageBase64String = it
                 )
             )
         }

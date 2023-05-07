@@ -10,6 +10,11 @@ import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.User
 import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.databinding.ActivityLoginBinding
+import com.example.silkway.presentation.utils.Validation.isValidEmail
+import com.example.silkway.presentation.utils.Validation.isValidName
+import com.example.silkway.presentation.utils.Validation.isValidPassword
+import com.example.silkway.presentation.utils.likeString
+import com.example.silkway.presentation.utils.toBitmap
 import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 
@@ -29,17 +34,39 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.btnLogIn.setOnClickListener {
             //TODO Do auth check with rememberBox
-            loginStorage.saveUserInfo(
-                User(
-                    id = 0,
-                    name = "Daniil Efimov",
-                    email = "daefimov@edu.hse.ru",
-                    isByer = true
-                )
-            )
-            val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-            mainViewModel.insertCatalogList(makeCatalogList())
-            MainActivity.start(this)
+            when(binding.textInputEdittextEmail.text.toString()) {
+                "rkarabash@edu.hse.ru" -> {
+                    loginStorage.saveUserInfo(
+                        User(
+                            id = 0,
+                            name = "Karabash Radimir",
+                            email = "rkarabash@edu.hse.ru",
+                            isByer = false
+                        )
+                    )
+                    goToNextScreen()
+                }
+                "daefimov@edu.hse.ru" -> {
+                    loginStorage.saveUserInfo(
+                        User(
+                            id = 0,
+                            name = "Daniil Efimov",
+                            email = "daefimov@edu.hse.ru",
+                            isByer = true
+                        )
+                    )
+                    goToNextScreen()
+                }
+                else -> {
+                    if (binding.textInputEdittextEmail.text!!.toString() ==
+                        loginStorage.getUserInfo().email) {
+                        goToNextScreen()
+                    }
+                    else {
+                        //TODO show warning
+                    }
+                }
+            }
         }
         binding.tvDontHaveAnAccount.setOnClickListener {
             SignUpActivity.start(this)
@@ -56,6 +83,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun goToNextScreen() {
+        val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainViewModel.insertCatalogList(makeCatalogList())
+        MainActivity.start(this)
+    }
+
     private fun makeCatalogList(): List<CatalogItem> {
         return listOf<CatalogItem>(
             CatalogItem(
@@ -67,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 10,
                 currentAmountRequests = 23,
                 minAmountRequests = 100,
-                image = R.drawable.wcatalog_image4,
+                image = R.drawable.wcatalog_image4.toBitmap(this).likeString(),
                 favourite = false,
                 description = "Get acquainted with the ways of using the oxygen cleaner on the packaging or on our card. The powder is diluted with boiling water, as a result of which the reaction of the release of active oxygen begins, which contributes to the splitting of contaminants. We do not recommend using it for products made of wool, silk, down and feather, leather, suede, nubuck, membrane fabrics, copper, aluminum. Cleaning the house now does not take much time and effort, because you will have our Brandfree miracle cleaner!",
             ),
@@ -80,9 +113,10 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 0,
                 currentAmountRequests = 37,
                 minAmountRequests = 100,
-                image = R.drawable.wcatalog_image3,
+                image = R.drawable.wcatalog_image3.toBitmap(this).likeString(),
                 favourite = false,
                 description = "Get acquainted with the ways of using the oxygen cleaner on the packaging or on our card. The powder is diluted with boiling water, as a result of which the reaction of the release of active oxygen begins, which contributes to the splitting of contaminants. We do not recommend using it for products made of wool, silk, down and feather, leather, suede, nubuck, membrane fabrics, copper, aluminum. Cleaning the house now does not take much time and effort, because you will have our Brandfree miracle cleaner!",
+                isMine = true,
             ),
             CatalogItem(
                 id = 2,
@@ -93,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 0,
                 currentAmountRequests = 25,
                 minAmountRequests = 200,
-                image = R.drawable.wcatalog_image1,
+                image = R.drawable.wcatalog_image1.toBitmap(this).likeString(),
                 favourite = false,
                 description = "The Easy Clean stain remover is an excellent helper in cleaning, washing and removing complex organic contaminants. ECO bleach - can be used for both manual and machine washing. It enhances the effects of classic powders. Oxygen stain remover gently cleans clothes, upholstered furniture, dishes, jewelry, can also be used for carpets.\n" +
                         "\n" +
@@ -110,7 +144,7 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 0,
                 currentAmountRequests = 10,
                 minAmountRequests = 320,
-                image = R.drawable.wcatalog_image2,
+                image = R.drawable.wcatalog_image2.toBitmap(this).likeString(),
                 favourite = false,
                 description = "You can get acquainted with the ways of using the oxygen cleaner on the packaging or on our card. The powder is diluted with boiling water, as a result of which the reaction of the release of active oxygen begins, which contributes to the splitting of contaminants. We do not recommend using it for products made of wool, silk, down and feather, leather, suede, nubuck, membrane fabrics, copper, aluminum. Cleaning the house now does not take much time and effort, because you will have our Brandfree miracle cleaner!",
             ),
@@ -123,7 +157,7 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 0,
                 currentAmountRequests = 461,
                 minAmountRequests = 1500,
-                image = R.drawable.catalog_example_item,
+                image = R.drawable.catalog_example_item.toBitmap(this).likeString(),
                 favourite = true,
                 description = resources.getString(R.string.example_description1),
             ),
@@ -136,7 +170,7 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 20,
                 currentAmountRequests = 33,
                 minAmountRequests = 2000,
-                image = R.drawable.wcatalog_image5,
+                image = R.drawable.wcatalog_image5.toBitmap(this).likeString(),
                 favourite = false,
                 description = "Get acquainted with the ways of using the oxygen cleaner on the packaging or on our card. The powder is diluted with boiling water, as a result of which the reaction of the release of active oxygen begins, which contributes to the splitting of contaminants. We do not recommend using it for products made of wool, silk, down and feather, leather, suede, nubuck, membrane fabrics, copper, aluminum. Cleaning the house now does not take much time and effort, because you will have our Brandfree miracle cleaner!",
             ),
@@ -149,9 +183,10 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 0,
                 currentAmountRequests = 13,
                 minAmountRequests = 70,
-                image = R.drawable.wcatalog_image6,
+                image = R.drawable.wcatalog_image6.toBitmap(this).likeString(),
                 favourite = false,
                 description = "Get acquainted with the ways of using the oxygen cleaner on the packaging or on our card. The powder is diluted with boiling water, as a result of which the reaction of the release of active oxygen begins, which contributes to the splitting of contaminants. We do not recommend using it for products made of wool, silk, down and feather, leather, suede, nubuck, membrane fabrics, copper, aluminum. Cleaning the house now does not take much time and effort, because you will have our Brandfree miracle cleaner!",
+                isMine = true,
             ),
             CatalogItem(
                 id = 7,
@@ -162,7 +197,7 @@ class LoginActivity : AppCompatActivity() {
                 youRequested = 0,
                 currentAmountRequests = 116,
                 minAmountRequests = 212,
-                image = R.drawable.wcatalog_image7,
+                image = R.drawable.wcatalog_image7.toBitmap(this).likeString(),
                 favourite = false,
                 description = "I am your remedy for everything! The Brandfree universal miracle cleaner effectively combats various contaminants. Any housewife will appreciate this ecological bleach, because it is an ideal tool for the home. Suitable for washing white, colored and black clothes. It perfectly removes old stains from clothes, stains from sweat and deodorant, herbs, berries, coffee, puree, fat, oil, blood, wine, drinks, any organic contamination, and also returns the white color to yellowed things.\n" +
                         "\n" +

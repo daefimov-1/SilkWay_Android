@@ -19,7 +19,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class ByerBottomSheetDialog(
     private val item_id: Int,
     private val needed_amount: Int,
-    private val youHaveRequested: Int
+    private val youHaveRequested: Int,
+    private val requestMaded: () -> Unit,
+    private val requestDeleted: () -> Unit,
 ): BottomSheetDialogFragment() {
     lateinit var binding: ByerBottomSheetBinding
 
@@ -38,6 +40,7 @@ class ByerBottomSheetDialog(
 
             binding.ibDelete.setOnClickListener {
                 mainViewModel.updateCatalogItemYouRequested(0, item_id)
+                requestDeleted.invoke()
                 dialog?.dismiss()
             }
         }
@@ -49,6 +52,7 @@ class ByerBottomSheetDialog(
             val youRequested = binding.textInputEdittextQuantity1.text.toString().toInt()
             if(youRequested > 0) {
                 mainViewModel.updateCatalogItemYouRequested(youRequested, item_id)
+                requestMaded.invoke()
                 dialog?.dismiss()
             } else {
                 binding.tvLeftToComplete.visibility = View.GONE

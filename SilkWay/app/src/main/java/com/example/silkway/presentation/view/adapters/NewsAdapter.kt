@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.silkway.R
 import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.NewsItem
+import com.example.silkway.presentation.utils.toBitmap
 import com.example.silkway.presentation.view.diffcallbacks.NewsItemDiffCallback
 
 class NewsAdapter(
@@ -36,9 +37,7 @@ class NewsAdapter(
 
         fun bind(item: NewsItem) {
             title.text = item.title
-            image.setImageDrawable(
-                context?.getDrawable(item.image)
-            )
+            image.setImageBitmap(item.image.toBitmap())
 
             itemView.setOnClickListener {
                 itemClickListener(item)

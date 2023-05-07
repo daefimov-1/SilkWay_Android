@@ -9,6 +9,7 @@ class MainViewModel : ViewModel() {
     private val catalogListLiveData : LiveData<List<CatalogItem>>? = App.instance.getCatalogItemsDao()?.getCatalogList()
     private val requestedCatalogListLiveData : LiveData<List<CatalogItem>>? = App.instance.getCatalogItemsDao()?.getRequestedCatalogList()
     private val favouritesCatalogListLiveData : LiveData<List<CatalogItem>>? = App.instance.getCatalogItemsDao()?.getFavouritesCatalogList()
+    private val mineCatalogListLiveData : LiveData<List<CatalogItem>>? = App.instance.getCatalogItemsDao()?.getMineCatalogList()
 
     fun getCatalogList() : LiveData<List<CatalogItem>>?{
         return catalogListLiveData
@@ -16,6 +17,10 @@ class MainViewModel : ViewModel() {
 
     fun getRequestedCatalogList() : LiveData<List<CatalogItem>>?{
         return requestedCatalogListLiveData
+    }
+
+    fun getMineCatalogList() : LiveData<List<CatalogItem>>?{
+        return mineCatalogListLiveData
     }
 
     fun getFavouritesCatalogList() : LiveData<List<CatalogItem>>?{

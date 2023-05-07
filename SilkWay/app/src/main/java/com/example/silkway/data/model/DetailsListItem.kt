@@ -4,7 +4,7 @@ sealed class DetailsListItem {
 
     data class Image(
         val id: Int,
-        val imageSrc: Int,
+        val imageBase64String: String,
     ): DetailsListItem()
 
     data class Description(
