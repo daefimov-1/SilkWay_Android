@@ -39,6 +39,10 @@ class MainViewModel : ViewModel() {
         App.instance.getCatalogItemsDao()?.insertAllCatalogItems(list)
     }
 
+    fun insertCatalogItem(item: CatalogItem) {
+        App.instance.getCatalogItemsDao()?.insertCatalogItem(item)
+    }
+
     fun deleteCatalogInfo() {
         App.instance.getCatalogItemsDao()?.deleteAll()
     }

@@ -26,6 +26,10 @@ class WishlistActivity : AppCompatActivity() {
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
 
+        binding.tvBack.setOnClickListener {
+            finish()
+        }
+
         binding.rvFavourites.layoutManager = GridLayoutManager(this, 2)
         val adapter = CatalogAdapter(
             this,

@@ -14,6 +14,7 @@ import com.example.silkway.presentation.view.details.CatalogDetailsActivity
 import com.example.silkway.presentation.viewmodel.MainViewModel
 import androidx.lifecycle.Observer
 import com.example.silkway.data.storage.LoginStorage
+import com.example.silkway.presentation.view.CreatingDealActivity
 import org.koin.android.ext.android.inject
 
 class SpecializedFragment : Fragment() {
@@ -86,13 +87,13 @@ class SpecializedFragment : Fragment() {
         binding.btnViewCatalog.isVisible = !value
         binding.btnViewCatalog.text = "Create delivery deal"
         binding.btnViewCatalog.setOnClickListener {
-            //TODO start activity for adding catalog item
+            CreatingDealActivity.start(requireActivity())
         }
         binding.vGradient.isVisible = value
         binding.tvTitle.isVisible = value
         binding.btnCreateDeal.isVisible = value
         binding.btnCreateDeal.setOnClickListener {
-            //TODO start activity for adding catalog item
+            CreatingDealActivity.start(requireActivity())
         }
         binding.nsvScrollview.isVisible = value
     }
