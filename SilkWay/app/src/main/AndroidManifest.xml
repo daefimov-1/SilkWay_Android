@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SilkWay"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.view.GetHelpActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.ChoosingCategoryActivity"
             android:exported="false" />
         <activity

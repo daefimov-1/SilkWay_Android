@@ -26,4 +26,9 @@ sealed class DetailsListItem {
         val id: Int,
         val text: String,
     ): DetailsListItem()
+
+    data class Recommend(
+        val id: Int,
+        val items: List<CatalogItem>
+    ): DetailsListItem()
 }

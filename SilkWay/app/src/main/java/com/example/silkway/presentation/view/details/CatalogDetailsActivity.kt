@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elveum.elementadapter.SimpleBindingAdapter
 import com.elveum.elementadapter.adapter
@@ -18,8 +19,10 @@ import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.databinding.ActivityCatalogDetailsBinding
 import com.example.silkway.databinding.RvImageBlockItemBinding
 import com.example.silkway.databinding.RvParamsBlockItemBinding
+import com.example.silkway.databinding.RvRecommendationsBlockItemBinding
 import com.example.silkway.databinding.RvTextBlockItemBinding
 import com.example.silkway.presentation.utils.toBitmap
+import com.example.silkway.presentation.view.adapters.CatalogAdapter
 import com.example.silkway.presentation.view.fragments.dialogs.ByerBottomSheetDialog
 import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
@@ -82,8 +85,24 @@ class CatalogDetailsActivity : AppCompatActivity() {
         }
 
         val adapter = createCompositeAdapter()
-        val list: List<DetailsListItem> = item.toListItem()
+        val list: ArrayList<DetailsListItem> = item.toListItem()
         adapter.submitList(list)
+
+        mainViewModel.getCatalogList()?.observe(this@CatalogDetailsActivity, Observer{
+            val recommendItems = mainViewModel.getCatalogList()?.value?.filter {
+                item.section == it.section && item.id != it.id
+            }?.take(4)
+            if (!recommendItems.isNullOrEmpty() && recommendItems.size > 1) {
+                list.add(
+                    DetailsListItem.Recommend(
+                        id = 0,
+                        items = recommendItems
+                    )
+                )
+                adapter.submitList(list)
+            }
+        })
+
         binding.rvDetailsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvDetailsRecyclerview.adapter = adapter
     }
@@ -120,10 +139,28 @@ class CatalogDetailsActivity : AppCompatActivity() {
                     tvText.text = description.text
                 }
             }
+
+            addBinding<DetailsListItem.Recommend, RvRecommendationsBlockItemBinding> {
+                areItemsSame = { oldItem, newItem -> oldItem.id == newItem.id }
+                bind { item1 ->
+                    rvItems.layoutManager = LinearLayoutManager(
+                        this@CatalogDetailsActivity,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    val adapter2 = CatalogAdapter(
+                        this@CatalogDetailsActivity,
+                        itemClickListener = { item -> start(this@CatalogDetailsActivity, item) },
+                        loginStorage
+                    )
+                    adapter2.submitList(item1.items)
+                    rvItems.adapter = adapter2
+                }
+            }
         }
     }
 
-    private fun CatalogItem.toListItem(): List<DetailsListItem> {
+    private fun CatalogItem.toListItem(): ArrayList<DetailsListItem> {
         val list = ArrayList<DetailsListItem>()
         this.image?.let {
             list.add(

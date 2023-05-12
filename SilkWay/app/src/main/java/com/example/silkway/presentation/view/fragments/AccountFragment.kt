@@ -9,17 +9,17 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.silkway.R
 import com.example.silkway.data.storage.LoginStorage
+import com.example.silkway.databinding.FragmentAccountBinding
+import com.example.silkway.databinding.FragmentByerBinding
+import com.example.silkway.presentation.view.GetHelpActivity
 import com.example.silkway.presentation.view.LoginActivity
 import com.example.silkway.presentation.view.WishlistActivity
 import com.example.silkway.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 
 class AccountFragment : Fragment() {
-    private lateinit var nameField: TextView
-    private lateinit var emailField: TextView
-    private lateinit var logOutButton: TextView
-    private lateinit var wishlistButton: TextView
     private val loginStorage by inject<LoginStorage>()
+    private lateinit var binding: FragmentAccountBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -27,26 +27,25 @@ class AccountFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_account, container, false)
-        nameField = view.findViewById(R.id.tv_name)
-        emailField = view.findViewById(R.id.tv_email)
-        logOutButton = view.findViewById(R.id.logOut)
-        wishlistButton = view.findViewById(R.id.myWishList)
+    ): View {
+        binding = FragmentAccountBinding.inflate(inflater, container, false)
         val mainViewModel : MainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        logOutButton.setOnClickListener {
+        binding.logOut.setOnClickListener {
             loginStorage.clearAll()
             mainViewModel.deleteCatalogInfo()
             LoginActivity.start(requireActivity())
             requireActivity().finish()
         }
-        wishlistButton.setOnClickListener {
+        binding.myWishList.setOnClickListener {
             WishlistActivity.start(requireActivity())
         }
+        binding.tvGetHelp.setOnClickListener {
+            GetHelpActivity.start(requireActivity())
+        }
         val user = loginStorage.getUserInfo()
-        nameField.text = user.name
-        emailField.text = user.email
-        return view
+        binding.tvName.text = user.name
+        binding.tvEmail.text = user.email
+        return binding.root
     }
 
     companion object {

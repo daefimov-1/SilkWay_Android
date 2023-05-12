@@ -59,7 +59,7 @@ class SpecializedFragment : Fragment() {
 
         binding.rvRequests.adapter = adapter
 
-        return binding.getRoot()
+        return binding.root
     }
 
     companion object {
