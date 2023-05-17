@@ -1,1 +1,2 @@
-# SilkWay_Android
+# SilkWay_Android  
+Android приложение электронной торговой площадки для долевых оптовых закупок
