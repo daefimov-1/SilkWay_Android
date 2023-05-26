@@ -99,6 +99,7 @@ class CreatingDealActivity : AppCompatActivity() {
                         isMine = true
                     )
                 )
+                finish()
             }
         }
     }

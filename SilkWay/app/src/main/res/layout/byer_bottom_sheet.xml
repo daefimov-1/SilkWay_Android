@@ -161,7 +161,7 @@
                 android:id="@+id/button_a"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/silkway_red"
+                android:backgroundTint="#FF7F50"
                 android:layout_weight="1"
                 android:text="Finish"
                 android:textColor="@color/white"/>

@@ -54,13 +54,13 @@
 
     <Button
         android:id="@+id/btn_make_request"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="68dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:backgroundTint="@color/silkway_red"
+        android:backgroundTint="#FF7F50"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:visibility="gone"

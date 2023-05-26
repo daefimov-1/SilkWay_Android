@@ -102,7 +102,7 @@
         android:layout_marginTop="16dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:backgroundTint="@color/silkway_red"
+        android:backgroundTint="#FF7F50"
         android:text="Send"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

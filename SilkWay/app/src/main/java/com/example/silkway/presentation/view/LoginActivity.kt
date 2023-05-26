@@ -2,6 +2,7 @@ package com.example.silkway.presentation.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -10,9 +11,6 @@ import com.example.silkway.data.model.CatalogItem
 import com.example.silkway.data.model.User
 import com.example.silkway.data.storage.LoginStorage
 import com.example.silkway.databinding.ActivityLoginBinding
-import com.example.silkway.presentation.utils.Validation.isValidEmail
-import com.example.silkway.presentation.utils.Validation.isValidName
-import com.example.silkway.presentation.utils.Validation.isValidPassword
 import com.example.silkway.presentation.utils.likeString
 import com.example.silkway.presentation.utils.toBitmap
 import com.example.silkway.presentation.viewmodel.MainViewModel
@@ -33,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
             ForgotPasswordActivity.start(this)
         }
         binding.btnLogIn.setOnClickListener {
-            //TODO Do auth check with rememberBox
             when(binding.textInputEdittextEmail.text.toString()) {
                 "rkarabash@edu.hse.ru" -> {
                     loginStorage.saveUserInfo(
@@ -63,7 +60,11 @@ class LoginActivity : AppCompatActivity() {
                         goToNextScreen()
                     }
                     else {
-                        //TODO show warning
+                        Toast.makeText(
+                            this,
+                            "Incorrect data",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
